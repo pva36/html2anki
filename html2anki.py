@@ -299,7 +299,7 @@ def strip_list_of_flashcards(list_of_flashcards, br_switch):
             if "<pre" in line:
                 lines.append(" " +
                              f.clean_html_comments(line.strip()).
-                             replace(" ", ""))
+                             replace("  ", " "))
                 skip = True
                 continue
             elif "</pre>" in line:
@@ -308,7 +308,7 @@ def strip_list_of_flashcards(list_of_flashcards, br_switch):
             if skip is False:
                 lines.append(" " +
                              f.clean_html_comments(line.strip()).
-                             replace(" ", ""))
+                             replace("  ", " "))
             else:
                 if br_switch is True:
                     lines.append(line + "<br>")
