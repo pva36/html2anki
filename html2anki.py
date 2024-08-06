@@ -5,24 +5,24 @@
 # Main program
 import sys
 import os
+import functions as f
 
 
 # main function
 def main():
-
     # default values
     # br_line_in_pre_element = True
 
     # Process Command line arguments
     if len(sys.argv) == 1:
-        print("No command was entered. Enter \"html2anki -h\" for help")
+        print('No command was entered. Enter "html2anki -h" for help')
         sys.exit()
 
     elif sys.argv[1] == "-h" or sys.argv[1] == "--help":
         print(help_message())
         sys.exit()
 
-    elif (sys.argv[1] == "template") or (sys.argv[1] == 't'):
+    elif (sys.argv[1] == "template") or (sys.argv[1] == "t"):
         counter = 1
         html_template = None
         skip_template = False
@@ -37,32 +37,36 @@ def main():
                 skip_template = True
                 html_template = sys.argv[counter + 1].strip()
 
-                if html_template.endswith('.html') is False:
-                    print('The filename indicated doesn\'t have an ".html" '
-                          'suffix.')
+                if html_template.endswith(".html") is False:
+                    print('The filename indicated doesn\'t have an ".html"' +
+                          ' "suffix."')
                     sys.exit()
 
                 elif os.path.isfile(f".//{html_template}") is True:
-                    print(f'The file "{html_template}" already exists in the '
-                          'current directory.')
+                    print(
+                        f'The file "{html_template}" already exists in the '
+                        "current directory."
+                    )
                     sys.exit()
 
             else:
-                print(f'WARNING:\t"{argument}" is not a valid option for'
-                      ' template.')
+                print(f'WARNING:\t"{argument}" is not a valid option for ' +
+                      '" template."')
                 sys.exit()
 
         if html_template is None:
             html_template = "html2anki_template.html"
             if os.path.isfile(html_template) is True:
-                print(f'A file with the default name "{html_template}" already'
-                      ' exists in the current directory.')
+                print(
+                    f'A file with the default name "{html_template}" already'
+                    " exists in the current directory."
+                )
                 sys.exit()
 
         create_html_template(html_template)
         sys.exit()
 
-    elif (sys.argv[1] == "convert") or (sys.argv[1] == 'c'):
+    elif (sys.argv[1] == "convert") or (sys.argv[1] == "c"):
         in_file_name = None
         out_file_name = None
         tag = None
@@ -80,10 +84,10 @@ def main():
                 skip_convert = True
                 in_file_name = sys.argv[counter + 1].strip()
 
-                if in_file_name.endswith('.html') is False:
+                if in_file_name.endswith(".html") is False:
                     print("WARNING: --file-in, -i.")
-                    print("The file indicated doesn't have an \".html\" "
-                          "suffix.")
+                    print('The file indicated doesn\'t have an ".html"' +
+                          ' "suffix."')
                     sys.exit()
 
                 if os.path.isfile(f"./{in_file_name}") is False:
@@ -95,7 +99,7 @@ def main():
                 skip_convert = True
                 out_file_name = sys.argv[counter + 1].strip()
 
-                if out_file_name.endswith('.csv') is False:
+                if out_file_name.endswith(".csv") is False:
                     print("WARNING: --file-out, -o.")
                     print('The output file doesn\'t have the ".csv" suffix.')
                     sys.exit()
@@ -107,14 +111,18 @@ def main():
 
                 if os.path.isfile(f"./{out_file_name_basic}") is True:
                     print("WARNING: --file-out, -o.")
-                    print(f'The file "{out_file_name_basic}" already exists'
-                          ' in the current directory')
+                    print(
+                        f'The file "{out_file_name_basic}" already exists'
+                        " in the current directory"
+                    )
                     sys.exit()
 
                 if os.path.isfile(f"./{out_file_name_cloze}") is True:
                     print("WARNING: --file-out, -o.")
-                    print(f'The file "{out_file_name_cloze}" already exists'
-                          ' in the current directory')
+                    print(
+                        f'The file "{out_file_name_cloze}" already exists'
+                        " in the current directory"
+                    )
                     sys.exit()
 
             elif ("--tag" in argument) or ("-t" in argument):
@@ -127,28 +135,32 @@ def main():
 
         # after checking all convert arguments:
         if in_file_name is None:
-            print("WARNING: Input html file was not indicated.\nUse the \"-i\""
-                  " option.")
+            print(
+                'WARNING: Input html file was not indicated.\n' +
+                'Use the "-i"' " option."
+            )
             sys.exit()
 
         if out_file_name is None:
             out_file_name = in_file_name.replace(".html", ".csv")
 
-            out_file_name_basic = out_file_name.replace(".csv",
-                                                        "_basic.csv")
-            out_file_name_cloze = out_file_name.replace(".csv",
-                                                        "_cloze.csv")
+            out_file_name_basic = out_file_name.replace(".csv", "_basic.csv")
+            out_file_name_cloze = out_file_name.replace(".csv", "_cloze.csv")
 
             if os.path.isfile(f"./{out_file_name_basic}") is True:
                 print("WARNING: --file-out, -o.")
-                print(f'The file "{out_file_name_basic}" already exists'
-                      ' in the current directory')
+                print(
+                    f'The file "{out_file_name_basic}" already exists'
+                    " in the current directory"
+                )
                 sys.exit()
 
             if os.path.isfile(f"./{out_file_name_cloze}") is True:
                 print("WARNING: --file-out, -o.")
-                print(f'The file "{out_file_name_cloze}" already exists'
-                      ' in the current directory')
+                print(
+                    f'The file "{out_file_name_cloze}" already exists'
+                    " in the current directory"
+                )
                 sys.exit()
 
         if tag is None:
@@ -167,7 +179,7 @@ def main():
         sys.exit()
 
     else:
-        print("Invalid Command. Enter \"html2anki -h\" for help.")
+        print('Invalid Command. Enter "html2anki -h" for help.')
         sys.exit()
 
 
@@ -204,34 +216,34 @@ def create_html_template(html_template_path):
   <body>
     <h1 class="cardnumber">Card 1</h1>
     <div class="flashcard"> <!-- ****************************************** -->
-      
+
       <hr class="frontback"/> <!-- ---------------------------------------- -->
-      
+
     </div> <!-- *********************************************************** -->
   </body>
 </html>
 """
-    with open(f"./{html_template_path}", 'w') as file:
+    with open(f"./{html_template_path}", "w") as file:
         file.write(html_template)
     print(f'The file "{html_template_path}" has been created.')
 
 
 def html_file_to_list(file_path):
     """
-    From a file path, returns every line of that file as a list of list of
+    From a file path, returns every line of that file as a list of lists of
     strings (one line, one string), where every list contain the lines of a
     flashcard
     """
-    with open(file_path, 'r') as file_object:
+    with open(file_path, "r") as file_object:
         first_list = file_object.readlines()
 
     second_list = []
     temp_list = []  # contains the line of an individual flashcard.
     skip = False
     for line in first_list:
-        if '<!DOCTYPE' in line:
+        if "<!DOCTYPE" in line:
             skip = True
-        elif '<body>' in line:
+        elif "<body>" in line:
             skip = False
             continue
 
@@ -246,14 +258,14 @@ def html_file_to_list(file_path):
                 temp_list = []
 
                 # and add the line that indicates the type of flashcard
-                temp_list.append(line.rstrip('\n'))
+                temp_list.append(line.rstrip("\n"))
 
-            elif '</body>' in line:
+            elif "</body>" in line:
                 second_list.append(temp_list)
                 del temp_list
                 break
             else:
-                temp_list.append(line.rstrip('\n'))
+                temp_list.append(line.rstrip("\n"))
                 # we begin again with the process of filling the temporal list.
         else:
             pass
@@ -266,8 +278,9 @@ def html_file_to_list(file_path):
 def strip_list_of_flashcards(list_of_flashcards, br_switch):
     """
     From a list of flashcards (one flashcard, one sub list) removes whitespace
-    at the beginning and end of line (plus one whitespace at the end). If the
-    content is inside a <pre> html tag, don't remove whitespace at all.
+    at the beginning and end of line (plus one whitespace at the end), and html
+    comments via a helper function. If the content is inside a <pre> html tag,
+    don't remove whitespace nor html comments at all.
     The br_switch is True or False. If true, append a '<br>' to every line
     enclosed in <pre> and </pre> html tags, else, do nothing.
     """
@@ -283,15 +296,19 @@ def strip_list_of_flashcards(list_of_flashcards, br_switch):
         lines = []
 
         for line in flashcard:
-            if '<pre' in line:
-                lines.append(" " + line.strip())
+            if "<pre" in line:
+                lines.append(" " +
+                             f.clean_html_comments(line.strip()).
+                             replace(" ", ""))
                 skip = True
                 continue
-            elif '</pre>' in line:
+            elif "</pre>" in line:
                 skip = False
 
             if skip is False:
-                lines.append(" " + line.strip())
+                lines.append(" " +
+                             f.clean_html_comments(line.strip()).
+                             replace(" ", ""))
             else:
                 if br_switch is True:
                     lines.append(line + "<br>")
@@ -362,13 +379,13 @@ convert:    Converts an html file into a csv file ready to import to anki.
 
 
 def write_basic_file(file_path, list_of_flashcards, tag):
-    with open(file_path, 'w') as f:
-        f.write(';;\n')
+    with open(file_path, "w") as f:
+        f.write(";;\n")
 
-    with open(file_path, 'a') as f:
+    with open(file_path, "a") as f:
         for flashcard in list_of_flashcards:
             f.write('"')
-            for line in flashcard[1: len(flashcard) - 1]:
+            for line in flashcard[1:len(flashcard) - 1]:
                 # if 'class="flashcard"' in line:
                 #     f.write('"')
                 if 'class="frontback"' in line:
@@ -387,13 +404,13 @@ def write_basic_file(file_path, list_of_flashcards, tag):
 
 
 def write_cloze_file(file_path, list_of_flashcards, tag):
-    with open(file_path, 'w') as f:
-        f.write(';\n')
+    with open(file_path, "w") as f:
+        f.write(";\n")
 
-    with open(file_path, 'a') as f:
+    with open(file_path, "a") as f:
         for flashcard in list_of_flashcards:
             f.write('"')
-            for line in flashcard[1: len(flashcard) - 1]:
+            for line in flashcard[1:len(flashcard) - 1]:
                 # if 'class="flashcardcloze"' in line:
                 #     f.write('"')
                 # elif list_of_flashcards[len(list_of_flashcards) - 1] == line:
