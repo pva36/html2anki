@@ -38,8 +38,10 @@ def main():
                 html_template = sys.argv[counter + 1].strip()
 
                 if html_template.endswith(".html") is False:
-                    print('The filename indicated doesn\'t have an ".html"' +
-                          ' "suffix."')
+                    print(
+                        'The filename indicated doesn\'t have an ".html"'
+                        + ' "suffix."'
+                    )
                     sys.exit()
 
                 elif os.path.isfile(f".//{html_template}") is True:
@@ -50,8 +52,10 @@ def main():
                     sys.exit()
 
             else:
-                print(f'WARNING:\t"{argument}" is not a valid option for ' +
-                      '" template."')
+                print(
+                    f'WARNING:\t"{argument}" is not a valid option for '
+                    + '" template."'
+                )
                 sys.exit()
 
         if html_template is None:
@@ -86,8 +90,10 @@ def main():
 
                 if in_file_name.endswith(".html") is False:
                     print("WARNING: --file-in, -i.")
-                    print('The file indicated doesn\'t have an ".html"' +
-                          ' "suffix."')
+                    print(
+                        'The file indicated doesn\'t have an ".html"'
+                        + ' "suffix."'
+                    )
                     sys.exit()
 
                 if os.path.isfile(f"./{in_file_name}") is False:
@@ -104,10 +110,12 @@ def main():
                     print('The output file doesn\'t have the ".csv" suffix.')
                     sys.exit()
 
-                out_file_name_basic = out_file_name.replace(".csv",
-                                                            "_basic.csv")
-                out_file_name_cloze = out_file_name.replace(".csv",
-                                                            "_cloze.csv")
+                out_file_name_basic = out_file_name.replace(
+                    ".csv", "_basic.csv"
+                )
+                out_file_name_cloze = out_file_name.replace(
+                    ".csv", "_cloze.csv"
+                )
 
                 if os.path.isfile(f"./{out_file_name_basic}") is True:
                     print("WARNING: --file-out, -o.")
@@ -136,8 +144,9 @@ def main():
         # after checking all convert arguments:
         if in_file_name is None:
             print(
-                'WARNING: Input html file was not indicated.\n' +
-                'Use the "-i"' " option."
+                "WARNING: Input html file was not indicated.\n"
+                + 'Use the "-i"'
+                " option."
             )
             sys.exit()
 
@@ -250,8 +259,9 @@ def html_file_to_list(file_path):
         if skip is False:
             if 'class="cardnumber"' in line:
                 pass
-            elif ('class="flashcard"' in line) or \
-                 ('class="flashcardcloze"' in line):
+            elif ('class="flashcard"' in line) or (
+                'class="flashcardcloze"' in line
+            ):
                 # we append the current temporal list to second list.
                 second_list.append(temp_list)
                 # then delete the contents of temp_list.
@@ -297,18 +307,20 @@ def strip_list_of_flashcards(list_of_flashcards, br_switch):
 
         for line in flashcard:
             if "<pre" in line:
-                lines.append(" " +
-                             f.clean_html_comments(line.strip()).
-                             replace("  ", " "))
+                lines.append(
+                    " "
+                    + f.clean_html_comments(line.strip()).replace("  ", " ")
+                )
                 skip = True
                 continue
             elif "</pre>" in line:
                 skip = False
 
             if skip is False:
-                lines.append(" " +
-                             f.clean_html_comments(line.strip()).
-                             replace("  ", " "))
+                lines.append(
+                    " "
+                    + f.clean_html_comments(line.strip()).replace("  ", " ")
+                )
             else:
                 if br_switch is True:
                     lines.append(line + "<br>")
@@ -385,7 +397,7 @@ def write_basic_file(file_path, list_of_flashcards, tag):
     with open(file_path, "a") as f:
         for flashcard in list_of_flashcards:
             f.write('"')
-            for line in flashcard[1:len(flashcard) - 1]:
+            for line in flashcard[1 : len(flashcard) - 1]:
                 # if 'class="flashcard"' in line:
                 #     f.write('"')
                 if 'class="frontback"' in line:
@@ -410,7 +422,7 @@ def write_cloze_file(file_path, list_of_flashcards, tag):
     with open(file_path, "a") as f:
         for flashcard in list_of_flashcards:
             f.write('"')
-            for line in flashcard[1:len(flashcard) - 1]:
+            for line in flashcard[1 : len(flashcard) - 1]:
                 # if 'class="flashcardcloze"' in line:
                 #     f.write('"')
                 # elif list_of_flashcards[len(list_of_flashcards) - 1] == line:
