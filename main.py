@@ -1,42 +1,15 @@
-import argparse
+import sys
+
+from args import get_args
 
 # CONSTANTS
 DEFAULT_TEMPLATE_FILE_NAME = "html2anki_template.html"
 
 
 def main():
-    # argsparse stuff ---------------------------------------------------------
-    parent_parser = argparse.ArgumentParser(prog="html2anki")
-
-    # 'dest' option is a placeholder in Namespace Object returned by
-    # 'argparse.ArgumentParser().parse_args()'. This allows to check whether
-    # a subcommand was entered (and which one exactly)
-    subparsers = parent_parser.add_subparsers(
-        title="subcommands",
-        dest="subcommand",
-    )
-
-    # CONVERT parser
-    parser_convert = subparsers.add_parser("convert")
-    parser_convert.add_argument("input_file", type=str)
-    parser_convert.add_argument(
-        "-o", "--output", help="Output file's name.", type=str
-    )
-    parser_convert.add_argument(
-        "-t", "--tag", help="Flashcard's tag.", type=str
-    )
-
-    # TEMPLATE parser
-    parser_template = subparsers.add_parser("template")
-    parser_template.add_argument(
-        "-o",
-        "--output",
-        help="Name of the file to be created. By default "
-        + f"'{DEFAULT_TEMPLATE_FILE_NAME}'.",
-        type=str,
-    )
-
-    args = parent_parser.parse_args()  # contains all the arguments
+    args = get_args().parse_args()
+    print(args)
+    sys.exit()
 
     # TEMPLATE ----------------------------------------------------------------
     if args.subcommand == "template":
