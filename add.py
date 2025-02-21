@@ -2,6 +2,7 @@ import argparse
 import pathlib
 import sys
 from bs4 import BeautifulSoup
+from bs4 import Comment
 import re
 
 
@@ -116,6 +117,10 @@ class Add:
         html_doc.html.body.append(flashcard_element)
 
     @staticmethod
+    def _append_comment(html_doc: BeautifulSoup) -> None:
+        html_doc.html.body.append(Comment(f' {"-" * 66} '))
+
+    @staticmethod
     def modify_html(input_path: pathlib.Path, flashcard_type: str) -> None:
         # TODO refactor this function
         with open(input_path, "r") as f:
@@ -136,6 +141,8 @@ class Add:
             Add._append_div_flashcardcloze(main_html_doc)
         else:
             Add._append_div_flashcardbasic(main_html_doc)
+
+        Add._append_comment(main_html_doc)
 
         with open(input_path, "w") as f:
             f.write(main_html_doc.prettify())
