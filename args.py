@@ -44,7 +44,6 @@ def add_template_parser(subparsers: argparse._SubParsersAction) -> None:
         help="Prefix of the file to be created. By default"
         + "'html2anki_template.html'",
         type=str,
-        required=True,
     )
 
 
