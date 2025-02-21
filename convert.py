@@ -13,6 +13,7 @@ class Convert:
         """
         fin_path, fout_prefix, tag = Convert._get_clean_user_input(args)
 
+    @staticmethod
     def _get_clean_user_input(
         args: argparse.Namespace,
     ) -> tuple[pathlib.Path, str, str]:

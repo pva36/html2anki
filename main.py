@@ -3,6 +3,7 @@ import sys
 from args import get_args
 from convert import Convert
 from template import Template
+from add import Add
 
 
 def main() -> None:
@@ -13,6 +14,9 @@ def main() -> None:
 
     elif args.subcommand == "template":
         Template.template(args)
+
+    elif args.subcommand == "add":
+        Add.add(args)
 
     else:
         get_args().parse_args(["--help"])

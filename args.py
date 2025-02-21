@@ -10,6 +10,7 @@ def get_args() -> argparse.ArgumentParser:
 
     add_convert_parser(subparsers)
     add_template_parser(subparsers)
+    add_add_parser(subparsers)
 
     return parent_parser
 
@@ -44,4 +45,16 @@ def add_template_parser(subparsers: argparse._SubParsersAction) -> None:
         + "'html2anki_template.html'",
         type=str,
         required=True,
+    )
+
+
+def add_add_parser(subparsers: argparse._SubParsersAction) -> None:
+    # TODO add descriptions
+    parser_add = subparsers.add_parser("add")
+    parser_add.add_argument("input", type=str)
+    parser_add.add_argument(
+        "--cloze", "-c", action=argparse.BooleanOptionalAction
+    )
+    parser_add.add_argument(
+        "--basic", "-b", action=argparse.BooleanOptionalAction
     )
