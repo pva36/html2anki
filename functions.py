@@ -1,4 +1,5 @@
 import pathlib
+import re
 
 
 def path_exists(path: str) -> bool:
@@ -21,7 +22,7 @@ def out_files_exists(
     existing_files: list[str] = []
     prefix: str
     if not prefix_path:
-        prefix = input_file.name
+        prefix = re.sub(r"\..*$", "", input_file.name)
     else:
         prefix = prefix_path
 
