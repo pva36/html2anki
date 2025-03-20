@@ -84,7 +84,11 @@ class Add:
         new_cardnumber_element.string = "Card " + str(new_cardnumber)
 
         # add card number header element
-        html_doc.html.body.append(new_cardnumber_element)
+        try:
+            html_doc.html.body.append(new_cardnumber_element)
+        except AttributeError:
+            print("ERROR: There is no html document inside the file input!")
+            sys.exit()
 
     @staticmethod
     def _append_div_flashcardcloze(html_doc: BeautifulSoup) -> None:
