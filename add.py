@@ -14,9 +14,6 @@ class Add:
         """
         fin, flashcard_type = Add._get_clean_user_input(args)
 
-        # print(f"fin: {fin}")
-        # print(f"flashcard_type: {flashcard_type}")
-
         Add.modify_html(fin, flashcard_type)
 
     @staticmethod

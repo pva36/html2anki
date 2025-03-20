@@ -54,16 +54,14 @@ class Convert:
         for s in flashcards_cloze_raw:
             cloze_flashcards.append(Convert._format_flashcard(s))
 
-        Convert._write_basic_flashcards(basic_flashcards, fout_prefix, tag)
+        if (len(basic_flashcards) == 0) and (len(cloze_flashcards) == 0):
+            print("ERROR: The input file does not contain any flashcards!")
+            sys.exit()
+        if len(basic_flashcards) > 0:
+            Convert._write_basic_flashcards(basic_flashcards, fout_prefix, tag)
 
-        Convert._write_cloze_flashcards(cloze_flashcards, fout_prefix, tag)
-
-        # print("BASIC FLASHCARDS")
-        # for flashcard in basic_flashcards:
-        #     print(f"“\n{flashcard}”\n")
-        # print("CLOZE FLASHCARDS")
-        # for flashcard in cloze_flashcards:
-        #     print(f"“\n{flashcard}\n”\n")
+        if len(cloze_flashcards) > 0:
+            Convert._write_cloze_flashcards(cloze_flashcards, fout_prefix, tag)
 
     @staticmethod
     def _split_basic_flashcards(
@@ -181,7 +179,6 @@ class Convert:
         has_pre_regex = r"^[\s\S]*<\s*pre.*>([\s\S]*)<.*/pre.*>[\s\S]*$"
         if re.match(has_pre_regex, flashcard):
             pre_content = Convert._get_all_pre_content(flashcard)
-            # print("PRE BLOCK FOUND")
 
         lines = flashcard.split("\n")
 
@@ -189,7 +186,6 @@ class Convert:
 
         for line in lines:
             if not Convert._not_a_pre_line(line, pre_content):
-                # print(f"“{line}” -> A 'PRE' LINE")
                 formated_lines.append(line)
             else:
                 formated_line = re.sub(r"^\s*", "", line)

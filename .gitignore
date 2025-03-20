@@ -2,3 +2,6 @@
 __pycache__/
 test_html2anki/
 .venv/
+build/
+dist/
+*.spec
