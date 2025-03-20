@@ -1,4 +1,4 @@
-# Html3anki
+# Html2anki
 
 CLI tool written with Python that helps you create a single HTML document
 containing multiple Anki flashcards, and generates a TSV file for easy import
