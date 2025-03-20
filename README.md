@@ -1,5 +1,9 @@
 # Html3anki
 
+CLI tool written with Python that helps you create a single HTML document
+containing multiple Anki flashcards, and generates a TSV file for easy import
+into Anki, allowing you to work with your preferred text editor.
+
 ## Motivation
 
 When I create new flashcards for [*Anki*](https://apps.ankiweb.net/) using the
