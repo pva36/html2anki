@@ -21,9 +21,10 @@ def get_args() -> argparse.ArgumentParser:
 
 
 def add_convert_parser(subparsers: argparse._SubParsersAction) -> None:
-    description = "Extract all div elements of class 'flashcard' or "
-    description += "'flashcardcloze' and create tsv files containing them, "
-    description += "ready to import into anki (one per file)"
+    description = "Extracts all `div` element with specified classes "
+    description += "'flashcard' or 'flashcardcloze' and generates TSV files "
+    description += "containing the extracted content. The resulting TSV files "
+    description += "are ready to be imported into Anki."
     parser_convert = subparsers.add_parser("convert", description=description)
     parser_convert.add_argument("-i", "--input-file", type=str, required=True)
 
@@ -45,7 +46,11 @@ def add_convert_parser(subparsers: argparse._SubParsersAction) -> None:
 
 
 def add_template_parser(subparsers: argparse._SubParsersAction) -> None:
-    description = "creates an empty html document"
+    description = "Creates an empty HTML document containing CSS styling that "
+    description += (
+        "it easier to distinguish the flashcards when rendering the "
+    )
+    description += "HTML document on a web browser."
 
     parser_template = subparsers.add_parser(
         "template", description=description
@@ -61,9 +66,9 @@ def add_template_parser(subparsers: argparse._SubParsersAction) -> None:
 
 
 def add_add_parser(subparsers: argparse._SubParsersAction) -> None:
-    description = "appends an empty html div element of class 'flashcard' or "
-    description += "'flashcardcloze' as the last child element of the body of "
-    description += "the INPUT_FILE's html document "
+    description = "Appends an empty div element with the specified class as "
+    description += "the last child element of the body of the HTML document "
+    description += "contained by the input file."
     add_usage = "html2anki add [-h] [Exactly one of : -c, -b] input"
 
     parser_add = subparsers.add_parser(
