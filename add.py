@@ -67,10 +67,11 @@ class Add:
         cardnumber_element = BeautifulSoup(
             str(cardnumber_elements[-1]), "html.parser"
         )
-        # print(f"'{cardnumber_element.get_text().strip()}'")
+
         match = re.match(
-            r".*(\d{1,}).*", cardnumber_element.get_text().strip()
+            r"[^\d]*(\d{1,}).*", cardnumber_element.get_text().strip()
         )
+
         cardnumber = match.group(1)
         return int(cardnumber) + 1
 
@@ -131,7 +132,6 @@ class Add:
         for line in lines:
             HTML_DOC += line
 
-        # print(HTML_DOC)
         main_html_doc: BeautifulSoup = BeautifulSoup(HTML_DOC, "html.parser")
 
         new_cardnumber = Add._get_next_cardnumber(main_html_doc)
